@@ -12,6 +12,7 @@ public class ShopController {
     @RequestMapping("/shops")
     public String shops(){
         System.out.println(99999999);
+        System.out.println(99999999);
         return "/shop";
     }
 
