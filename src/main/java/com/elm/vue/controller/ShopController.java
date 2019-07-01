@@ -13,6 +13,7 @@ public class ShopController {
     public String shops(){
         System.out.println(99999999);
         System.out.println(99999999);
+        System.out.println(99999999);
         return "/shop";
     }
 
