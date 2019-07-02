@@ -1,20 +1,23 @@
 package com.elm.vue.controller;
 
 
+import com.elm.vue.entity.Shop;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
 public class ShopController {
 
     @RequestMapping("/shops")
     public String shops(){
-        System.out.println(99999999);
-        System.out.println(99999999);
-        System.out.println(99999999);
+
         return "/shop";
+    }
+
+    @PostMapping("/shop")
+    public String add(@RequestBody Shop shop){
+
+            return "success";
     }
 
 }
