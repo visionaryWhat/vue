@@ -4,7 +4,11 @@ import com.elm.vue.entity.Shop;
 import com.elm.vue.mapper.ShopMapper;
 import com.elm.vue.service.ShopService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import java.util.Map;
+
+@Service
 public class ShopServiceImpl implements ShopService {
 
     @Autowired
@@ -12,6 +16,12 @@ public class ShopServiceImpl implements ShopService {
 
     @Override
     public int add(Shop shop) {
-        return shopMapper.add(shop);
+        Map<String, Object> stringObjectMap = shopMapper.queryShopById(shop.getId());
+       /* if(stringObjectMap!=null&&stringObjectMap.size()!=0){
+            return  shopMapper.add(shop);
+        }*/
+            return -1;
     }
+
+
 }

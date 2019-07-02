@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.elm.vue.mapper.ShopMapper">
+    <insert id="addShop">
+        insert into shop  values (id,name,time);
+    </insert>
+
+    <select id="queryShopById" resultType="Hashmap">
+        select * from shop WHERE id = #{id};
+    </select>
+
+  <!--  <delete id="removeShop">
+        DELETE FROM shop WHERE id = #{id}
+    </delete>-->
+
+
+</mapper>
