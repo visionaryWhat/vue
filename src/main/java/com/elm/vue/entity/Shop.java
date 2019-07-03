@@ -7,7 +7,6 @@ public class Shop {
 
     @Id
     @Column(length = 4)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)//自增主键
     private Integer id;
     @Column(length = 10)
     private String name;
@@ -17,7 +16,8 @@ public class Shop {
     public Shop() {
     }
 
-    public Shop(String name, String time) {
+    public Shop(Integer id,String name, String time) {
+        this.id = id;
         this.name = name;
         this.time = time;
     }

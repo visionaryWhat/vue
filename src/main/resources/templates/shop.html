@@ -19,12 +19,12 @@
         <div class="panel-body form-inline">
             <label>
                 Id:
-                <input type="text" class="form-control" v-model="shop.id">
+                <input maxlength="4" type="text" class="form-control" v-model="shop.id">
             </label>
 
             <label>
                 Name:
-                <input type="text" class="form-control" v-model="shop.name" >
+                <input maxlength="10" type="text" class="form-control" v-model="shop.name" >
             </label>
 
             <input type="button"  @click="add()" value="添加"  class="btn btn-primary">
@@ -46,12 +46,12 @@
         </tr>
         </thead>
         <tbody>
-        <tr >
-            <td></td>
-            <td></td>
-            <td></td>
+        <tr v-for="s in shops" :key="s.id" >
+            <td>{{s.id}}</td>
+            <td>{{s.name}}</td>
+            <td>{{s.time | dateFormat('yyyy-mm-dd hh:mm:ss')}}</td>
             <td>
-                <a href="">删除</a>
+                <a href="" @click.prevent="remove(s.id)">删除</a>
             </td>
         </tr>
         </tbody>
@@ -64,19 +64,48 @@
     var vm = new Vue({
         el:'#app',
         data:{
-           shop:{id:'',name:'',time:new Date()}
+           shop:{id:'',name:'',time:new Date()},
+            shops:[]
         },
         created(){
-
+            this.getAllList(1);
         },
         methods:{
-            getAllList(){
-
+            getAllList(start){
+                axios.get("shops?start="+start+"").then(response => {
+                   vm.shops = response.data.list
+                })
             },
             add(){
             axios.post("shop",this.shop).then(function (response) {
-              console.log( response.data)
+              if(response.data<0) {
+                  alert("添加失败，id重复");
+              }else {
+                  vm.getAllList(1);
+                }
             })
+            },
+            remove(id){
+                axios.delete("shops/"+id+"").then(function (response) {
+                    console.log(response.data)
+                    vm.getAllList(1);
+                })
+            }
+        },
+        filters:{
+            dateFormat:function (dateStr,pattern='yyyy-mm-dd') {
+                var date = new Date(dateStr)
+                var y = date.getFullYear();
+                var m = date.getMonth().toString().padStart(2,'0');
+                var d = date.getDate().toString().padStart(2,'0');
+                if(pattern.toLocaleLowerCase() === 'yyyy-mm-dd'){
+                    return `${y}-${m}-${d}`
+                }else{
+                    var hh = date.getHours().toString().padStart(2, '0')
+                    var mm = date.getMinutes().toString().padStart(2, '0')
+                    var ss = date.getSeconds().toString().padStart(2, '0')
+                    return `${y}-${m}-${d} ${hh}:${mm}:${ss}`
+                }
             }
         }
     })
