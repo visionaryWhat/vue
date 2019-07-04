@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -51,7 +52,7 @@ public class ShopController {
     @DeleteMapping("/shops/{id}")
     public String remove(@PathVariable Integer id){
         shopService.removeShopById(id);
-        return "-1";
+        return "success";
     }
 
 }
