@@ -26,6 +26,7 @@ public class ShopServiceImpl implements ShopService {
     }
 
     public List<Map<String,Object>> queryShops(){
+        System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaa");
         return  shopMapper.queryShops();
     }
 

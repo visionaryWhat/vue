@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -41,11 +42,17 @@ public class ShopController {
      * @return
      */
     @GetMapping("/shops")
-    public PageInfo<Map<String,Object>> queryShops(@RequestParam(value = "start",defaultValue = "1") int start,@RequestParam(value = "size",defaultValue = "5") int size){
+    public Map<String,Object> queryShops(@RequestParam(value = "start",defaultValue = "1") int start,@RequestParam(value = "size",defaultValue = "5") int size){
         PageHelper.startPage(start,size,"time desc");
         List<Map<String, Object>> shops = shopService.queryShops();
+        List<Map<String, Object>> shops2 = shopService.queryShops();
+
         PageInfo<Map<String,Object>> pageInfo = new PageInfo<>(shops,5);
-        return pageInfo;
+        System.out.println(pageInfo);
+        Map<String,Object> map = new HashMap<>();
+        map.put("pageInfo",pageInfo);
+        map.put("list",shops2);
+        return map;
     }
 
 
