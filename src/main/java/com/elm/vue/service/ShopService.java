@@ -9,7 +9,7 @@ public interface ShopService {
 
      int addShop(Shop shop);
 
-    List<Map<String,Object>> queryShops();
+    List<Map<String,Object>> queryShops(String name);
 
     Integer removeShopById(Integer id);
 

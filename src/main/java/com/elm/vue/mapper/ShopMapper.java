@@ -3,6 +3,7 @@ package com.elm.vue.mapper;
 
 import com.elm.vue.entity.Shop;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -16,7 +17,7 @@ public interface ShopMapper {
 
      Map<String,Object> queryShopById(Integer id);
 
-     List<Map<String,Object>> queryShops();
+     List<Map<String,Object>> queryShops(@Param("name") String name);
 
      Integer removeShopById(Integer id);
 }

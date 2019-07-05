@@ -25,9 +25,8 @@ public class ShopServiceImpl implements ShopService {
         return shopMapper.addShop(shop);
     }
 
-    public List<Map<String,Object>> queryShops(){
-        System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaa");
-        return  shopMapper.queryShops();
+    public List<Map<String,Object>> queryShops(String name){
+        return  shopMapper.queryShops(name);
     }
 
     public Integer removeShopById(Integer id){

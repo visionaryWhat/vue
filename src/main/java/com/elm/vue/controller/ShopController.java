@@ -42,17 +42,14 @@ public class ShopController {
      * @return
      */
     @GetMapping("/shops")
-    public Map<String,Object> queryShops(@RequestParam(value = "start",defaultValue = "1") int start,@RequestParam(value = "size",defaultValue = "5") int size){
+    public PageInfo<Map<String,Object>> queryShops(@RequestParam(value = "start",defaultValue = "1") int start,@RequestParam(value = "size",defaultValue = "5") int size,@RequestParam("keyword") String keyword){
         PageHelper.startPage(start,size,"time desc");
-        List<Map<String, Object>> shops = shopService.queryShops();
-        List<Map<String, Object>> shops2 = shopService.queryShops();
+        System.out.println(keyword);
+        System.out.println(11111111);
+        List<Map<String, Object>> shops = shopService.queryShops(keyword);
 
         PageInfo<Map<String,Object>> pageInfo = new PageInfo<>(shops,5);
-        System.out.println(pageInfo);
-        Map<String,Object> map = new HashMap<>();
-        map.put("pageInfo",pageInfo);
-        map.put("list",shops2);
-        return map;
+        return pageInfo;
     }
 
 
